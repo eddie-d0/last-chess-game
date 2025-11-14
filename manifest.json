@@ -1,0 +1,11 @@
+{
+  "id": "last-chess-com-game",
+  "name": "Last Chess.com Game",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Quickly pull your latest game from Chess.com and insert it directly into your daily note.",
+  "author": "Eddie",
+  "authorUrl": "https://github.com/eddie-d0",
+  "isDesktopOnly": false,
+  "main": "main.js"
+}
