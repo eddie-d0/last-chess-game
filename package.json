@@ -1,0 +1,16 @@
+{
+  "name": "last-chess.com-game",
+  "version": "1.0.0",
+  "description": "Obsidian plugin to insert details about the last Chess.com game for a user.",
+  "main": "main.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist index.js main.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "obsidian": "^1.5.7",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
