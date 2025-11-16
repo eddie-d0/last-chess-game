@@ -1,20 +1,12 @@
-/tmp
-/out-tsc
+# Ignore everything
+*
 
-/node_modules
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-/.pnp
-.pnp.js
-
-.vscode/*
-
-.idea/
-*.iml
-out/
+# But keep these files
 !main.js
 !manifest.json
 !README.md
 !LICENSE.md
+
+# Also keep the .gitignore itself
+!.gitignore
 
