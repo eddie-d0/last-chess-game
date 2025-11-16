@@ -1,11 +1,12 @@
-src/
+# Ignore everything
+*
 
-# But keep these files
+# Keep these files
 !main.js
 !manifest.json
 !README.md
 !LICENSE.md
 
-# Also keep the .gitignore itself
+# Keep this file so the rules stay in the repo
 !.gitignore
 
