@@ -1,4 +1,4 @@
-# Last Chess.com Game
+# Last Chess Game
 
 This Obsidian plugin lets you quickly pull your latest game from Chess.com and insert it directly into your daily note. Since everyone formats their notes differently, the plugin provides flexible templating options so you can display game data exactly the way you like it.
 
@@ -13,6 +13,12 @@ Getting started is simple:
 
 Supported tokens:
 `yyyy`, `MM`, `dd`, `HH`, `hh`, `mm`, `ss`, `a` (AM/PM)
+
+---
+
+## Planned
+
+- Add support for getting game information from Lichess.org.
 
 ---
 
