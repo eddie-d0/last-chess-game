@@ -741,18 +741,7 @@ export default class LastChessComGamePlugin extends Plugin {
   }
 
   private registerCommands() {
-    // Last game regardless of type (default user)
-    this.addCommand({
-      id: this.cmdIds.any,
-      name: this.nameAny(),
-      callback: async () => {
-        const u = await this.ensureDefaultUsername();
-        if (!u) return;
-        await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: u });
-      },
-    });
-
-    // Time-class specific commands (default user)
+    // Time-class specific commands (default user) — order: Daily, Rapid, Blitz, Bullet
     this.addCommand({
       id: this.cmdIds.daily,
       name: this.nameDaily(),
@@ -762,15 +751,7 @@ export default class LastChessComGamePlugin extends Plugin {
         await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'daily' });
       },
     });
-    this.addCommand({
-      id: this.cmdIds.blitz,
-      name: this.nameBlitz(),
-      callback: async () => {
-        const u = await this.ensureDefaultUsername();
-        if (!u) return;
-        await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'blitz' });
-      },
-    });
+
     this.addCommand({
       id: this.cmdIds.rapid,
       name: this.nameRapid(),
@@ -780,6 +761,17 @@ export default class LastChessComGamePlugin extends Plugin {
         await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'rapid' });
       },
     });
+
+    this.addCommand({
+      id: this.cmdIds.blitz,
+      name: this.nameBlitz(),
+      callback: async () => {
+        const u = await this.ensureDefaultUsername();
+        if (!u) return;
+        await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'blitz' });
+      },
+    });
+
     this.addCommand({
       id: this.cmdIds.bullet,
       name: this.nameBullet(),
@@ -790,12 +782,23 @@ export default class LastChessComGamePlugin extends Plugin {
       },
     });
 
-    // Single Lookup User command (modal)
+    // Lookup command (modal)
     this.addCommand({
       id: this.cmdIds.lookup,
       name: 'Lookup user…',
       callback: async () => {
         new LookupUserModal(this.app, this).open();
+      },
+    });
+
+    // Last game regardless of type (default user) — keep registered last
+    this.addCommand({
+      id: this.cmdIds.any,
+      name: this.nameAny(),
+      callback: async () => {
+        const u = await this.ensureDefaultUsername();
+        if (!u) return;
+        await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: u });
       },
     });
   }

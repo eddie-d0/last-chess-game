@@ -9,3 +9,12 @@ yarn-error.log*
 .pnp.js
 
 .vscode/*
+
+.idea/
+*.iml
+out/
+!main.js
+!manifest.json
+!README.md
+!LICENSE.md
+

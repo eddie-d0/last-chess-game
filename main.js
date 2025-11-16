@@ -641,18 +641,7 @@ class LastChessComGamePlugin extends obsidian_1.Plugin {
         return `${this.manifest.id}:${shortId}`;
     }
     registerCommands() {
-        // Last game regardless of type (default user)
-        this.addCommand({
-            id: this.cmdIds.any,
-            name: this.nameAny(),
-            callback: async () => {
-                const u = await this.ensureDefaultUsername();
-                if (!u)
-                    return;
-                await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: u });
-            },
-        });
-        // Time-class specific commands (default user)
+        // Time-class specific commands (default user) — order: Daily, Rapid, Blitz, Bullet
         this.addCommand({
             id: this.cmdIds.daily,
             name: this.nameDaily(),
@@ -661,16 +650,6 @@ class LastChessComGamePlugin extends obsidian_1.Plugin {
                 if (!u)
                     return;
                 await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'daily' });
-            },
-        });
-        this.addCommand({
-            id: this.cmdIds.blitz,
-            name: this.nameBlitz(),
-            callback: async () => {
-                const u = await this.ensureDefaultUsername();
-                if (!u)
-                    return;
-                await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'blitz' });
             },
         });
         this.addCommand({
@@ -684,6 +663,16 @@ class LastChessComGamePlugin extends obsidian_1.Plugin {
             },
         });
         this.addCommand({
+            id: this.cmdIds.blitz,
+            name: this.nameBlitz(),
+            callback: async () => {
+                const u = await this.ensureDefaultUsername();
+                if (!u)
+                    return;
+                await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'blitz' });
+            },
+        });
+        this.addCommand({
             id: this.cmdIds.bullet,
             name: this.nameBullet(),
             callback: async () => {
@@ -693,12 +682,23 @@ class LastChessComGamePlugin extends obsidian_1.Plugin {
                 await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: '' }, { timeClass: 'bullet' });
             },
         });
-        // Single Lookup User command (modal)
+        // Lookup command (modal)
         this.addCommand({
             id: this.cmdIds.lookup,
             name: 'Lookup user…',
             callback: async () => {
                 new LookupUserModal(this.app, this).open();
+            },
+        });
+        // Last game regardless of type (default user) — keep registered last
+        this.addCommand({
+            id: this.cmdIds.any,
+            name: this.nameAny(),
+            callback: async () => {
+                const u = await this.ensureDefaultUsername();
+                if (!u)
+                    return;
+                await this.fetchInsert(u, this.settings.templateDefault, { lookupUsername: u });
             },
         });
     }
