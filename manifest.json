@@ -6,6 +6,5 @@
   "description": "Quickly pull your latest game from Chess.com and insert it directly into your daily note.",
   "author": "eddie",
   "authorUrl": "https://github.com/eddie-d0",
-  "isDesktopOnly": false,
-  "main": "main.js"
+  "isDesktopOnly": false
 }
